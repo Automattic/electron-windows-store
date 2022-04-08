@@ -1,6 +1,6 @@
 {
   "name": "electron2appx",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Compile Electron Apps into Windows Store AppX packages",
   "main": "lib/index.js",
   "bin": {
