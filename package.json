@@ -1,10 +1,10 @@
 {
-  "name": "electron-windows-store",
+  "name": "electron2appx",
   "version": "2.1.1",
   "description": "Compile Electron Apps into Windows Store AppX packages",
   "main": "lib/index.js",
   "bin": {
-    "electron-windows-store": "bin/windowsstore.js"
+    "electron2appx": "bin/windowsstore.js"
   },
   "scripts": {
     "test": "standard \"lib/*.js\" \"bin/**/*.js\" && mocha",

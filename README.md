@@ -2,19 +2,19 @@
 
 ## [**Disclaimer**]
 
-This repository is forked from [Electron Windows Store](https://github.com/felixrieseberg/electron-windows-store.git) due to its inactivity, to suit my own use of submitting appx to Windows Store. Please use as is. I am not an official maintainer of this project and may not have time to solve the peculiar issues that other users could be facing.
+This repository is forked from [Electron Windows Store](https://github.com/felixrieseberg/electron2appx.git) due to its inactivity, to suit my own use of submitting appx to Windows Store. Please use as is. I am not an official maintainer of this project and may not have time to solve the peculiar issues that other users could be facing.
 
 That said, your [support](https://www.buymeacoffee.com/bl5s3cxyr) is always welcome. Thanks!
 
 ---
 
-Electron-Windows-Store: A CLI that takes the packaged output of your Electron app, then converts it into an AppX package. This allows you to submit your Electron app to the Windows Store :package:. You can also distribute your app as an `.appx` without using the Windows Store, allowing users to just double-click your `.appx` to automatically install it.
+electron2appx: A CLI that takes the packaged output of your Electron app, then converts it into an AppX package. This allows you to submit your Electron app to the Windows Store :package:. You can also distribute your app as an `.appx` without using the Windows Store, allowing users to just double-click your `.appx` to automatically install it.
 
 ![main_image](https://cloud.githubusercontent.com/assets/1426799/15042115/3471f6a0-12b9-11e6-91b4-80f25ec1d0b8.jpg)
 
 To install this command line tool, get it directly from npm:
 
-    npm install -g electron-windows-store
+    npm install -g electron2appx
 
 Then, configure your PowerShell:
 
@@ -22,13 +22,13 @@ Then, configure your PowerShell:
 
 To turn an Electron app into an AppX package, run:
 
-    electron-windows-store --input-directory C:\myelectronapp  --output-directory C:\output\myelectronapp --package-version 1.0.0.0 --package-name myelectronapp
+    electron2appx --input-directory C:\myelectronapp  --output-directory C:\output\myelectronapp --package-version 1.0.0.0 --package-name myelectronapp
 
 This tool supports two methods to create AppX packages: Either using manual file copy operations, or using Windows Containers. The first option requires only the [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk), while the second option also requires the [Desktop App Converter](https://docs.microsoft.com/en-us/windows/uwp/porting/desktop-to-uwp-run-desktop-app-converter).
 
 # Usage
 
-Before running the Electron-Windows-Store CLI, let's make sure we have all the prerequisites in place. You will need:
+Before running the electron2appx CLI, let's make sure we have all the prerequisites in place. You will need:
 
 - Windows 10 with at least the Anniversary Update (if your Windows has been updated before 2018, you're good).
 - Windows 10 SDK from [here](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk)
@@ -55,9 +55,9 @@ The output should look roughly like this:
 
 ## Convert with File Copying
 
-**From an elevated PowerShell (run it "as Administrator")**, run `electron-windows-store` with the required parameters, passing both the input and output directories, the app's name and version. If you don't pass these parameters, we will simply ask you for them.
+**From an elevated PowerShell (run it "as Administrator")**, run `electron2appx` with the required parameters, passing both the input and output directories, the app's name and version. If you don't pass these parameters, we will simply ask you for them.
 
-    electron-windows-store --input-directory C:\myelectronapp  --output-directory C:\output\myelectronapp --package-version 1.0.0.0 --package-name myelectronapp
+    electron2appx --input-directory C:\myelectronapp  --output-directory C:\output\myelectronapp --package-version 1.0.0.0 --package-name myelectronapp
 
 These are all options for the CLI:
 
@@ -91,7 +91,7 @@ These are all options for the CLI:
   --signtool-params <params>                 Additional parameters for signtool.exe (example: --makeappx-params "/l","/d")
   --create-config-params <params>            Additional parameters for makepri.exe "createconfig" (example: --create-config-params "/l","/d")')
   --create-pri-params <params>               Additional parameters for makepri.exe "new" (example: --create-pri-params "/l","/d")')
-  --verbose <true|false>                     Enable debugging (similar to setting a DEBUG=electron-windows-store environment variable)
+  --verbose <true|false>                     Enable debugging (similar to setting a DEBUG=electron2appx environment variable)
 ```
 
 ### Windows Store Submission
@@ -115,7 +115,7 @@ As per [Windows App icons and logos](https://docs.microsoft.com/en-us/windows/ap
 You can call this package directly. All options correspond to the CLI options and are equally optional. There is one exception: You can provide a `finalSay` function, which will be executed right before `makeappx.exe` is being called. This allows you to modify the output folder right before we turn it into a package.
 
 ```js
-const convertToWindowsStore = require('electron-windows-store')
+const convertToWindowsStore = require('electron2appx')
 
 convertToWindowsStore({
   containerVirtualization: false,
@@ -160,7 +160,7 @@ The Desktop App Converter is capable of running an installer and your app during
 2. Then, run the installation of the Desktop App Converter, passing in the location of the Windows .ase Image (downloaded as `BaseImage-14316.wim`), by calling `.\DesktopAppConverter.ps1 -Setup -BaseImage .\BaseImage-14316.wim`.
 3. If running the above command prompts you for a reboot, please restart your machine and run the above command again after a successful restart.
 
-Then, run `electron-windows-store` with the `--container-virtualization` flag!
+Then, run `electron2appx` with the `--container-virtualization` flag!
 
 ### What is the CLI Doing?
 
@@ -170,7 +170,7 @@ Once we have the expanded AppX files, the tool uses the Windows App Packager (`M
 
 ## Configuration
 
-:bulb: The first time you run this tool, it needs to know some settings. It will ask you only once and store your answers in your profile folder in a `.electron-windows-store` file. You can also provide these values as a parameter when running the CLI.
+:bulb: The first time you run this tool, it needs to know some settings. It will ask you only once and store your answers in your profile folder in a `.electron2appx` file. You can also provide these values as a parameter when running the CLI.
 
 ```json
 {
@@ -192,7 +192,7 @@ The compiled AppX package still contains a win32 executable - and will therefore
 
 ## Development
 
-`electron-windows-store` uses [Semantic Release](https://github.com/semantic-release/semantic-release) to
+`electron2appx` uses [Semantic Release](https://github.com/semantic-release/semantic-release) to
 automate the whole release process. In order to have a PR merged, please ensure that your PR
 follows the commit guidelines so that our robots can understand your change. This repository uses
 the [default `conventional-changelog` rules](https://www.conventionalcommits.org/en/v1.0.0-beta.2/).

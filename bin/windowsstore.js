@@ -57,7 +57,7 @@ if (program.windowsBuild) {
 
 if (program.verbose) {
   var debug = process.env.DEBUG || ''
-  process.env.DEBUG = 'electron-windows-store,' + debug
+  process.env.DEBUG = 'electron2appx,' + debug
 }
 
 var ensureParams = require('../lib/params')

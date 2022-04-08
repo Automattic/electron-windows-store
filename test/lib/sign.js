@@ -9,7 +9,7 @@ const sign = require('../../lib/sign')
 const utils = require('../../lib/utils')
 
 describe('Sign', () => {
-  const tmpDir = path.join(require('os').tmpdir(), 'electron-windows-store-cert-test')
+  const tmpDir = path.join(require('os').tmpdir(), 'electron2appx-cert-test')
 
   let passedArgs = []
   let passedProcess = []
