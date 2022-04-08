@@ -15,7 +15,7 @@ describe('Sign', () => {
   let passedProcess = []
 
   const cpMock = {
-    spawn(_process, _args) {
+    spawn (_process, _args) {
       passedProcess.push(_process)
       passedArgs.push(_args)
 
@@ -92,6 +92,11 @@ describe('Sign', () => {
       const programMock = {}
       return sign.signAppx(programMock).should.be.rejected
     })
+
+    it('should return without signing if cert is nil', function () {
+      const programMock = { devCert: 'Nil' }
+      return sign.signAppx(programMock).should.eventually.equal('unsigned')
+    })
   })
 
   describe('makeCert()', () => {
@@ -106,13 +111,13 @@ describe('Sign', () => {
           windowsKit: '/fake/kit'
         }
       })
-      .then(() => {
-        passedArgs.every((args) => {
-          return args.every(arg => arg.indexOf('Import-PfxCertificate') === -1)
-        }).should.equal(true)
-        done()
-      })
-      .catch(() => {})
+        .then(() => {
+          passedArgs.every((args) => {
+            return args.every(arg => arg.indexOf('Import-PfxCertificate') === -1)
+          }).should.equal(true)
+          done()
+        })
+        .catch(() => { })
     })
   })
 
@@ -201,7 +206,7 @@ describe('Sign', () => {
       expectInvalid: true
     }, {
       publisherName: 'CN=X,DNQ=qualifier',
-	  expectInvalid: true
+      expectInvalid: true
     }, {
       // According to RFC1779 and RFC2243 this should be legal but MakeCert.exe does not seem to accept it
       publisherName: 'CN=Sue\\, Grabbit and Runn',
@@ -212,7 +217,7 @@ describe('Sign', () => {
       const actualResult = sign.isValidPublisherName(scenario.publisherName)
       let nameToPrint = scenario.publisherName.replace(/\n/g, '\\n')
       if (nameToPrint.length > 60)
-        nameToPrint = nameToPrint.slice(0,61) + '...'
+        nameToPrint = nameToPrint.slice(0, 61) + '...'
 
       // Compare pre-determined checks (previously confirmed with makecert.exe)
       it(`return ${scenario.expectInvalid ? 'false' : 'true'} for ${nameToPrint}`, () => {
@@ -221,15 +226,15 @@ describe('Sign', () => {
 
       // Run makecert.exe and check whether or not it fails with this publisherName
       if (!skipMakeCertExecution) {
-        const rnd = Date.now() + '-' + Math.floor(Math.random()*10000)
+        const rnd = Date.now() + '-' + Math.floor(Math.random() * 10000)
         const crtFileName = path.join(tmpDir, `makecert-${rnd}.crt`)
         const makecertArgs = ['-r', '-h', '0', '-n', scenario.publisherName, '-eku', '1.3.6.1.5.5.7.3.3', '-pe', '-sv', pvkFileName, crtFileName]
 
         it(`makecert.exe should ${scenario.expectInvalid ? 'fail' : 'succeed'} for ${nameToPrint}`, () => {
           return utils.executeChildProcess(makecertExe, makecertArgs)
-          .then(() => { return true })
-          .catch(() => { return false })
-          .should.eventually.equal(!scenario.expectInvalid)
+            .then(() => { return true })
+            .catch(() => { return false })
+            .should.eventually.equal(!scenario.expectInvalid)
         })
       }
     })

@@ -10,8 +10,8 @@
   <Properties>
     <DisplayName>${packageDisplayName}</DisplayName>
     <PublisherDisplayName>${publisherDisplayName}</PublisherDisplayName>
-    <Description>No description entered</Description>
-    <Logo>assets\SampleAppx.50x50.png</Logo>
+    <Description>${packageDescription}</Description>
+    <Logo>assets\StoreLogo.png</Logo>
   </Properties>
   <Resources>
     <Resource Language="en-us" />
@@ -23,14 +23,14 @@
     <rescap:Capability Name="runFullTrust"/>
   </Capabilities>
   <Applications>
-    <Application Id="${packageName}" Executable="${packageExecutable}" EntryPoint="Windows.FullTrustApplication">
+    <Application Id="${applicationId}" Executable="${packageExecutable}" EntryPoint="Windows.FullTrustApplication">
       <uap:VisualElements
        BackgroundColor="${packageBackgroundColor}"
        DisplayName="${packageDisplayName}"
-       Square150x150Logo="assets\SampleAppx.150x150.png"
-       Square44x44Logo="assets\SampleAppx.44x44.png"
+       Square150x150Logo="assets\Square150x150Logo.png"
+       Square44x44Logo="assets\Square44x44Logo.png"
        Description="${packageDescription}">
-        <uap:DefaultTile Wide310x150Logo="assets\SampleAppx.310x150.png" />
+        <uap:DefaultTile Wide310x150Logo="assets\Wide310x150Logo.png" />
       </uap:VisualElements>
     </Application>
   </Applications>

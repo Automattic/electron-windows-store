@@ -1,6 +1,6 @@
 {
   "name": "electron-windows-store",
-  "version": "2.0.1",
+  "version": "2.1.1",
   "description": "Compile Electron Apps into Windows Store AppX packages",
   "main": "lib/index.js",
   "bin": {
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/felixrieseberg/electron-windows-store.git"
+    "url": "git+https://github.com/hermit99/electron-windows-store.git"
   },
   "keywords": [
     "Electron",
@@ -30,9 +30,9 @@
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/felixrieseberg/electron-windows-store/issues"
+    "url": "https://github.com/hermit99/electron-windows-store/issues"
   },
-  "homepage": "https://github.com/felixrieseberg/electron-windows-store#readme",
+  "homepage": "https://github.com/hermit99/electron-windows-store#readme",
   "dependencies": {
     "chalk": "^2.4.1",
     "commander": "^2.19.0",
