@@ -140,6 +140,7 @@ convertToWindowsStore({
   makePri: true,
   createConfigParams: ['/a'],
   createPriParams: ['/b'],
+  architecture: 'x64',
   finalSay: function () {
     return new Promise((resolve, reject) => resolve())
   }
